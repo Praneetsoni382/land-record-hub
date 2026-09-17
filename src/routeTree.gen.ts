@@ -16,6 +16,7 @@ import { Route as AuthenticatedAuditRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedRecordsRouteImport } from './routes/_authenticated/records'
 import { Route as AuthenticatedCasesIndexRouteImport } from './routes/_authenticated/cases.index'
+import { Route as AuthenticatedCasesCaseIdRouteImport } from './routes/_authenticated/cases.$caseId'
 import { Route as AuthenticatedCasesNewRouteImport } from './routes/_authenticated/cases.new'
 
 const IndexRoute = IndexRouteImport.update({
@@ -52,6 +53,12 @@ const AuthenticatedCasesIndexRoute = AuthenticatedCasesIndexRouteImport.update({
   path: '/cases/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCasesCaseIdRoute =
+  AuthenticatedCasesCaseIdRouteImport.update({
+    id: '/cases/$caseId',
+    path: '/cases/$caseId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedCasesNewRoute = AuthenticatedCasesNewRouteImport.update({
   id: '/cases/new',
   path: '/cases/new',
@@ -64,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/audit': typeof AuthenticatedAuditRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/records': typeof AuthenticatedRecordsRoute
+  '/cases/$caseId': typeof AuthenticatedCasesCaseIdRoute
   '/cases/new': typeof AuthenticatedCasesNewRoute
   '/cases/': typeof AuthenticatedCasesIndexRoute
 }
@@ -73,6 +81,7 @@ export interface FileRoutesByTo {
   '/audit': typeof AuthenticatedAuditRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/records': typeof AuthenticatedRecordsRoute
+  '/cases/$caseId': typeof AuthenticatedCasesCaseIdRoute
   '/cases/new': typeof AuthenticatedCasesNewRoute
   '/cases': typeof AuthenticatedCasesIndexRoute
 }
@@ -84,6 +93,7 @@ export interface FileRoutesById {
   '/_authenticated/audit': typeof AuthenticatedAuditRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/records': typeof AuthenticatedRecordsRoute
+  '/_authenticated/cases/$caseId': typeof AuthenticatedCasesCaseIdRoute
   '/_authenticated/cases/new': typeof AuthenticatedCasesNewRoute
   '/_authenticated/cases/': typeof AuthenticatedCasesIndexRoute
 }
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
     | '/audit'
     | '/dashboard'
     | '/records'
+    | '/cases/$caseId'
     | '/cases/new'
     | '/cases/'
   fileRoutesByTo: FileRoutesByTo
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '/audit'
     | '/dashboard'
     | '/records'
+    | '/cases/$caseId'
     | '/cases/new'
     | '/cases'
   id:
@@ -114,6 +126,7 @@ export interface FileRouteTypes {
     | '/_authenticated/audit'
     | '/_authenticated/dashboard'
     | '/_authenticated/records'
+    | '/_authenticated/cases/$caseId'
     | '/_authenticated/cases/new'
     | '/_authenticated/cases/'
   fileRoutesById: FileRoutesById
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCasesIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/cases/$caseId': {
+      id: '/_authenticated/cases/$caseId'
+      path: '/cases/$caseId'
+      fullPath: '/cases/$caseId'
+      preLoaderRoute: typeof AuthenticatedCasesCaseIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/cases/new': {
       id: '/_authenticated/cases/new'
       path: '/cases/new'
@@ -189,6 +209,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAuditRoute: typeof AuthenticatedAuditRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedRecordsRoute: typeof AuthenticatedRecordsRoute
+  AuthenticatedCasesCaseIdRoute: typeof AuthenticatedCasesCaseIdRoute
   AuthenticatedCasesNewRoute: typeof AuthenticatedCasesNewRoute
   AuthenticatedCasesIndexRoute: typeof AuthenticatedCasesIndexRoute
 }
@@ -197,6 +218,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAuditRoute: AuthenticatedAuditRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedRecordsRoute: AuthenticatedRecordsRoute,
+  AuthenticatedCasesCaseIdRoute: AuthenticatedCasesCaseIdRoute,
   AuthenticatedCasesNewRoute: AuthenticatedCasesNewRoute,
   AuthenticatedCasesIndexRoute: AuthenticatedCasesIndexRoute,
 }
